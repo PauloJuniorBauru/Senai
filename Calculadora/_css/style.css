@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -7,7 +9,7 @@
 body {    
     background-color: #272727;
     color: #e8eaed;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 .center {
@@ -17,7 +19,7 @@ body {
 
 div.display {
     width: 650px;
-    height: 70px;
+    height: 75px;
     border: 1px solid #bdc1c6;
     border-radius: 10px;
     padding: 10px;
@@ -48,14 +50,15 @@ div.calc {
 
 div.keyboard {
     width: 650px;
-    height: 180px;
+    height: 200px;
 
     display: grid;
     grid-template-columns: 250px 400px;
+    gap: 3px;
 }
 
 div.logo {
-    padding-top: 5px;
+    padding-top: 15px;
     border: 1px solid #bdc1c6;
     border-radius: 5px;
     margin-right: 5px;
@@ -63,16 +66,16 @@ div.logo {
 
 div.key {
     display: grid;
-    grid-template-columns: auto auto auto auto auto;
-    gap: 5px;
+    grid-template-columns: 73px 73px 73px 73px 73px;
+    gap: 8px;
 }
 
 div.btn {    
     background-color: #5f6368;
     border-radius: 5px; 
-    font-size: 18px;   
+    font-size: 14px;   
     text-align: center;
-    line-height: 32px;
+    padding-top: 8px;
     cursor: pointer;
 } 
 
@@ -93,8 +96,9 @@ div.num:hover {
 }
 
 div.equal {
-    color: #202124;   
-    font-weight: bolder;
+    color: #202124;
+    font-size: 18px;   
+    font-weight: 900;
     background-color: #8ab4f8;
 }
 
