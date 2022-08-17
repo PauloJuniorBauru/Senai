@@ -1,13 +1,13 @@
-let save_op = '';
 let display = '';
 let result = '';
+let save_op = '';
 let show = document.querySelector('div.calc');
 let hist = document.querySelector('div.hist');
 
 const button = {
     number(n) {
-        display += n;
-        result += n;
+        display += (save_op == 'π') ? ` × ${n}` : n;
+        result += (save_op == 'π') ? `*${n}` : n;
         
         show.innerHTML = display;
     },
@@ -18,7 +18,8 @@ const button = {
             }
 
             save_op = op;  
-            display += (op != '(' && op != ')') ? ` ${op} ` : op; // Espaço entre números, mas não entre parênteses        
+            // Espaço entre números, mas não entre parênteses e Raiz Quadrada
+            display += (op != '(' && op != ')' && op != '√' && op != 'π') ? ` ${op} ` : op;      
             show.innerHTML = display;
 
             switch (op) { 
@@ -55,6 +56,9 @@ const button = {
                     display = '';
                     show.innerHTML = '0';
                     hist.innerHTML = '';
+                    break;
+                case 'π':
+                    result += (isNaN(result[result.length - 1]) == false) ? `*${Math.PI}` : Math.PI;
                     break;
             }
         }
