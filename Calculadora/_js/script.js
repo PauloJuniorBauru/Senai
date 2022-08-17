@@ -13,7 +13,7 @@ const button = {
     },
     operator(op) {
         if (display[display.length -2] != op) { 
-            if (save_op == '√') {
+            if (save_op == '√' && op != 'π') {
                 result += `)`;
             }
 
@@ -64,7 +64,7 @@ const button = {
         }
     },
     equal() {
-        if (save_op == '√') {
+        if (save_op == '√' || !isNaN(display[display.length -1]) == false) {
             result += `)`;
         }
 
