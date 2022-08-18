@@ -1,4 +1,3 @@
 # Senai
-## Exercícios, Trabalhos e Projetos
 
-Realizados em aula ou em casa.
+Exercícios, Trabalhos e Projetos realizados em aula ou em casa.
