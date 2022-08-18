@@ -1,34 +1,45 @@
 let display = '';
 let result = '';
 let save_op = '';
+let exp = '';
+let base = '';
 let show = document.querySelector('div.calc');
 let hist = document.querySelector('div.hist');
 
 const button = {
     number(n) {
-        display += (save_op == 'π') ? ` × ${n}` : n;
-        result += (save_op == 'π') ? `*${n}` : n;
+        if (display.indexOf('<sup>') != -1) {
+            exp += n;            
+            display = `${base}<sup>${exp}</sup>`;
+            result = `Math.pow(${base}, ${exp})`; 
+        }
+        else {
+            display += (save_op == 'π') ? ` × ${n}` : n;
+            result += (save_op == 'π') ? `*${n}` : n;
+        }
         
         show.innerHTML = display;
     },
     operator(op) {
         if (display[display.length -2] != op && display[display.length -1] != op) { 
-            // Removendo espaço de alguns operadores       
-            display += (op != '(' && op != ')' && op != '√' && op != 'π') ? ` ${op} ` : op; 
-
-            show.innerHTML = display;
-
+            
+            if (show.innerHTML == 0 && op == `x <sup>y</sup>`) {
+                base = 0;
+                display = `${base}<sup>☐</sup>`;
+            } 
+            else if (op == `x <sup>y</sup>`) {
+                base = display;
+                display = `${base}<sup>☐</sup>`;
+            }
+            else {
+                // Removendo espaço de alguns operadores       
+                display += (op != '(' && op != ')' && op != '√' && op != 'π') ? ` ${op} ` : op; 
+            }
+            
             if (save_op == '√' && op != 'π') 
                 result += `)`;
-
-            // if (show.innerHTML == 0 && op == `x <sup>y</sup>`) {
-            //     display = `0<sup>☐</sup>`;
-            //     result = `Math.pow(0,`;
-            // } 
-            
-            // if (op == `x <sup>2</sup>`) {
-            //     display = `${display}<sup>2</sup>`;
-            // }
+                        
+            show.innerHTML = display;
             save_op = op;
 
             switch (op) { 
@@ -40,27 +51,9 @@ const button = {
                     result += `)`;
                     break;
 
-                // case `x <sup>2</sup>`:  
-                //     if (isNaN(result.charAt(result.length -2)) == false) {
-                //         result += `Math.pow(${result}, ${2})`;
-                //     }
-                //     else {
-                //         const g1 = result.slice(0,result.length -1);
-                //         const g2 = result.slice(1, result.length);
-                //         result = g2;
-                        
-                //         console.log(result);
-                //     }
-                //     break;
-
-                // case `x <sup>y</sup>`:
-                //     if (result.indexOf('Math') == -1) {
-                //         const p = display.indexOf('<');
-                //         const n = display.substring(p, 0);                   
-                    
-                //         result += `Math.pow(${n},`;
-                //     }                    
-                //     break;
+                case `x <sup>y</sup>`:
+                    result = `Math.pow(${base}, ${exp})`;                     
+                    break;
 
                 case '+':
                     result += `+`;
@@ -102,6 +95,9 @@ const button = {
         if (save_op == '√' && isNaN(display[display.length -1]) == false) {
             result += `)`;
         }
+        else if (save_op == `x <sup>y</sup>`) {
+            result = `Math.pow(${base}, ${exp})`; 
+        }
 
         display += '=';
         hist.innerHTML = display;
@@ -110,6 +106,7 @@ const button = {
         show.innerHTML = result;
         display = result;
         save_op = '';
+        exp = '';
         console.log(`Result = ${result}`); // Apagar Depois ==================== 
         // console.log(`Display = ${display}`); // Apagar Depois ====================     
     }
