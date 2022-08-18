@@ -12,15 +12,24 @@ const button = {
         show.innerHTML = display;
     },
     operator(op) {
-        if (display[display.length -2] != op) { 
-            if (save_op == '√' && op != 'π') {
-                result += `)`;
-            }
+        if (display[display.length -2] != op && display[display.length -1] != op) { 
+            // Removendo espaço de alguns operadores       
+            display += (op != '(' && op != ')' && op != '√' && op != 'π') ? ` ${op} ` : op; 
 
-            save_op = op;  
-            // Espaço entre números, mas não entre parênteses e Raiz Quadrada
-            display += (op != '(' && op != ')' && op != '√' && op != 'π') ? ` ${op} ` : op;      
             show.innerHTML = display;
+
+            if (save_op == '√' && op != 'π') 
+                result += `)`;
+
+            // if (show.innerHTML == 0 && op == `x <sup>y</sup>`) {
+            //     display = `0<sup>☐</sup>`;
+            //     result = `Math.pow(0,`;
+            // } 
+            
+            // if (op == `x <sup>2</sup>`) {
+            //     display = `${display}<sup>2</sup>`;
+            // }
+            save_op = op;
 
             switch (op) { 
                 case '(':
@@ -30,6 +39,28 @@ const button = {
                 case ')':
                     result += `)`;
                     break;
+
+                // case `x <sup>2</sup>`:  
+                //     if (isNaN(result.charAt(result.length -2)) == false) {
+                //         result += `Math.pow(${result}, ${2})`;
+                //     }
+                //     else {
+                //         const g1 = result.slice(0,result.length -1);
+                //         const g2 = result.slice(1, result.length);
+                //         result = g2;
+                        
+                //         console.log(result);
+                //     }
+                //     break;
+
+                // case `x <sup>y</sup>`:
+                //     if (result.indexOf('Math') == -1) {
+                //         const p = display.indexOf('<');
+                //         const n = display.substring(p, 0);                   
+                    
+                //         result += `Math.pow(${n},`;
+                //     }                    
+                //     break;
 
                 case '+':
                     result += `+`;
@@ -41,7 +72,11 @@ const button = {
                 
                 case '×':
                     result += `*`;
-                    break;   
+                    break;  
+                    
+                case 'mod':
+                    result += `%`;
+                    break;  
                 
                 case '÷':
                     result += `/`;
@@ -64,7 +99,7 @@ const button = {
         }
     },
     equal() {
-        if (save_op == '√' || !isNaN(display[display.length -1]) == false) {
+        if (save_op == '√' && isNaN(display[display.length -1]) == false) {
             result += `)`;
         }
 
@@ -74,7 +109,9 @@ const button = {
         result = eval(result);
         show.innerHTML = result;
         display = result;
-        console.log(eval(result)); // Apagar Depois ====================   
+        save_op = '';
+        console.log(`Result = ${result}`); // Apagar Depois ==================== 
+        // console.log(`Display = ${display}`); // Apagar Depois ====================     
     }
 }
 
