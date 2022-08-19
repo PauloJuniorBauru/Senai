@@ -8,4 +8,4 @@
 * Fatorial
 * Modulo
 
-- Desenvolvimento da calculadora finalizado, porém ainda falta diversos tratamentos de erros, mudanças e melhorias no código.
+Desenvolvimento da calculadora finalizado, porém ainda falta diversos tratamentos de erros, mudanças e melhorias no código.
