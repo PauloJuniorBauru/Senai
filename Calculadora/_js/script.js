@@ -31,16 +31,23 @@ const button = {
                 base = display;
                 display = `${base}<small>?</small>`;
             }
+            else if (show.innerHTML == 0 && op == `x!`) {
+                base = 0;
+                display = `${base}!`;
+            } 
+            else if (show.innerHTML != 0 && op == `x!`) {
+                base = display;
+                display = `${base}!`;
+            } 
+            else if (save_op == '√' && op != 'π') 
+                result += `)`;
             else {
                 // Removendo espaço de alguns operadores       
                 display += (op != '(' && op != ')' && op != '√' && op != 'π') ? ` ${op} ` : op; 
             }
             
-            if (save_op == '√' && op != 'π') 
-                result += `)`;
-                        
-            show.innerHTML = display;
-            save_op = op;
+            save_op = op;            
+            show.innerHTML = display;            
 
             switch (op) { 
                 case '(':
@@ -90,6 +97,18 @@ const button = {
                 case 'π':
                     result += (isNaN(result[result.length - 1]) == false) ? `*${Math.PI}` : Math.PI;
                     break;
+
+                case `x!`:
+                    function fatorial(n) {
+                        let fat = 1;
+                        for (let i = n; i > 1; i--) {
+                            fat *= i;
+                        }
+                        return fat;
+                    }; 
+                    
+                    result = fatorial(base);
+                    break;
             }
         }
     },
@@ -100,9 +119,14 @@ const button = {
         else if (save_op == `x <small>y</small>`) {
             result = `Math.pow(${base}, ${exp})`; 
         }
-
+        else if (display.indexOf('√π') != -1) {
+            result += `)`;
+        }
+        
         display += '=';
         hist.innerHTML = display;
+
+        console.log(result); // Apagar Depois ==================== 
         
         result = eval(result);
         show.innerHTML = result;
@@ -110,7 +134,6 @@ const button = {
         save_op = '';
         exp = '';
         console.log(`Result = ${result}`); // Apagar Depois ==================== 
-        // console.log(`Display = ${display}`); // Apagar Depois ====================     
     }
 }
 
