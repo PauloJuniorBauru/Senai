@@ -8,9 +8,9 @@ let hist = document.querySelector('div.hist');
 
 const button = {
     number(n) {
-        if (display.indexOf('<sup>') != -1) {
+        if (display.indexOf('<small>') != -1 && save_op == 'x <small>y</small>') {
             exp += n;            
-            display = `${base}<sup>${exp}</sup>`;
+            display = `${base}<small>${exp}</small>`;
             result = `Math.pow(${base}, ${exp})`; 
         }
         else {
@@ -23,13 +23,13 @@ const button = {
     operator(op) {
         if (display[display.length -2] != op && display[display.length -1] != op) { 
             
-            if (show.innerHTML == 0 && op == `x <sup>y</sup>`) {
+            if (show.innerHTML == 0 && op == `x <small>y</small>`) {
                 base = 0;
-                display = `${base}<sup>☐</sup>`;
+                display = `${base}<small>?</small>`;
             } 
-            else if (op == `x <sup>y</sup>`) {
+            else if (op == `x <small>y</small>`) {
                 base = display;
-                display = `${base}<sup>☐</sup>`;
+                display = `${base}<small>?</small>`;
             }
             else {
                 // Removendo espaço de alguns operadores       
@@ -51,7 +51,7 @@ const button = {
                     result += `)`;
                     break;
 
-                case `x <sup>y</sup>`:
+                case `x <small>y</small>`:
                     result = `Math.pow(${base}, ${exp})`;                     
                     break;
 
@@ -80,8 +80,10 @@ const button = {
                     break;
 
                 case 'C':
-                    result = '';
                     display = '';
+                    result = '';
+                    save_op = '';
+                    exp = '';
                     show.innerHTML = '0';
                     hist.innerHTML = '';
                     break;
@@ -95,7 +97,7 @@ const button = {
         if (save_op == '√' && isNaN(display[display.length -1]) == false) {
             result += `)`;
         }
-        else if (save_op == `x <sup>y</sup>`) {
+        else if (save_op == `x <small>y</small>`) {
             result = `Math.pow(${base}, ${exp})`; 
         }
 

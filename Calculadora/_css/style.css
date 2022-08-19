@@ -12,6 +12,11 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+small {
+    position: relative;
+    top: -10px;
+}
+
 .center {
    width: 650px;
    margin: 20px auto;
