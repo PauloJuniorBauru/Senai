@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.center {
+    width: 800px;
+    margin: 20px auto 0;
+}
+
+section#man {
+    position: relative;
+    width: 800px;
+    height: 450px;
+    margin: 20px 0;
+    border: 6px solid #5a5a5a;
+    border-radius: 20px;
+    background-color: #5c94fc;
+    overflow: hidden;
+}
+
+img#bullet {
+    position: absolute;
+    bottom: 0;
+    width: 7%;
+    animation: bullet-animation 2s infinite linear;
+}
+
+img.mario {
+    position: absolute;
+    bottom: 0;
+    width: 10%;
+    left: 5%;
+}
+
+img.jump {
+    animation: mario-animation 500ms linear;
+}
+
+img#floor {
+    position: absolute;
+    bottom: 0;
+    width: 50%;
+    animation: floor-animation 6s infinite linear;
+}
+
+img#clauds {
+    position: absolute;
+    width: 30%;
+    padding-top: 3%;
+    animation: clauds-animation 28s infinite linear;
+}
+
+
+
+
+/* Animação do Bullet  */
+@keyframes bullet-animation {
+    from {
+        left: 100%;
+    }
+    to {
+        left: -7%;
+    }
+}
+
+/* Animação do Mario  */
+@keyframes mario-animation {
+    0% { bottom: 0%; }
+
+    30% { bottom: 30%; }
+
+    40% { bottom: 30%; }
+
+    50% { bottom: 30%; }
+    
+    100% { bottom: 0%; }    
+}
+
+/* Animação do Floor */
+@keyframes floor-animation {
+    from {
+        left: 100%;
+    }
+    to {
+        left: -50%;
+    }
+}
+
+/* Animação dos Clauds  */
+@keyframes clauds-animation {
+    from {
+        left: 100%;
+    }
+    to {
+        left: -30%;
+    }
+}
+
+
+
+
+section#data {
+    margin-top: 50px;
+}
+
+hgroup h3 {
+    font-weight: normal;
+    padding: 2px 0;
+}
